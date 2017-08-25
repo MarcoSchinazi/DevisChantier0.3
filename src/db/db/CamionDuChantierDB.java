@@ -12,13 +12,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author Vali
  */
 public class CamionDuChantierDB {
-    
+
     public static List<CamionDuChantierDto> getAllCamionDuChantier() throws DevisChantierDbException {
         List<CamionDuChantierDto> elements = getCollection(new CamionDuChantierSel(0));
         return elements;
@@ -35,6 +34,12 @@ public class CamionDuChantierDB {
             if (sel.getIdCamionDuChantier() != 0) {
                 where = where + " idCamionDuChantier = ? ";
             }
+            if (sel.getIdChantier() != 0) {
+                if (!where.equals("")) {
+                    where = where + " AND ";
+                }
+                where = where + " idChantier = ? ";
+            }
 
             if (where.length() != 0) {
                 where = " where " + where;
@@ -45,17 +50,21 @@ public class CamionDuChantierDB {
                     stmt.setInt(i, sel.getIdCamionDuChantier());
                     i++;
                 }
+                if (sel.getIdChantier() != 0) {
+                    stmt.setInt(i, sel.getIdChantier());
+                    i++;
+                }
             } else {
                 stmt = connexion.prepareStatement(query);
             }
             java.sql.ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 al.add(new CamionDuChantierDto(
-                        rs.getInt("idCamionDuChantier"), 
+                        rs.getInt("idCamionDuChantier"),
                         rs.getDate("debutDisponibilite"),
                         rs.getDate("finDisponibilite"),
-                        rs.getInt("idChantier"), 
-                        rs.getInt("idCamion"), 
+                        rs.getInt("idChantier"),
+                        rs.getInt("idCamion"),
                         rs.getDouble("nombreHeures")
                 )
                 );
@@ -122,5 +131,3 @@ public class CamionDuChantierDB {
         }
     }
 }
-    
-

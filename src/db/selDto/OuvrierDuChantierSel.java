@@ -27,6 +27,9 @@ public class OuvrierDuChantierSel {
         this.idOuvrier = idOuvrier;
     }
     
+    public OuvrierDuChantierSel(int idChantier, String c) {
+        this.idChantier = idChantier;
+    }
 
     public int getIdOuvrierDuChantier() {
         return idOuvrierDuChantier;

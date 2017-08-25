@@ -5,7 +5,6 @@
  */
 package devischantier;
 
-import db.dto.EnginDto;
 import db.selDto.EnginDuChantierSel;
 import db.selDto.EnginSel;
 
@@ -28,15 +27,6 @@ import db.selDto.VoitureDuChantierSel;
 import db.selDto.VoitureSel;
 
 import db.selDto.CamionDuChantierSel;
-import db.selDto.CamionSel;
-import db.dto.CamionDto;
-
-import db.dto.ClientDto;
-
-import db.dto.DevisDto;
-
-import db.selDto.ChantierSel;
-import db.dto.ChantierDto;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -44,12 +34,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Utilitaire;
-import db.business.FacadeDB;
-import db.exception.DevisChantierBusinessException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import java.sql.Date;
 import static javafx.application.Application.launch;
 
 /**
@@ -100,9 +84,8 @@ public class DevisChantier2 extends Application {
         Utilitaire.supplement(core1, corecha1, 10);
         
         //COUT OUVRIER
-        OuvrierSel ouv = new OuvrierSel(1);
         OuvrierDuChantierSel ouvcha = new OuvrierDuChantierSel(1);
-        Utilitaire.montantOuvriers(ouv, ouvcha);
+        Utilitaire.montantOuvriers(ouvcha);
         
         //COUT CONDUCTEUR
         ConducteurSel con = new ConducteurSel(1);
@@ -115,11 +98,10 @@ public class DevisChantier2 extends Application {
         Utilitaire.montantVoitures(voi, voicha);
         
         //COUT CAMION
-        CamionSel cam = new CamionSel(1);
         CamionDuChantierSel camcha = new CamionDuChantierSel(1);
-        Utilitaire.montantCamions(cam, camcha); 
-        System.out.println((Utilitaire.montantCamions(cam, camcha))*10);
-        System.out.println(Utilitaire.montantCamions(cam, camcha));
+        Utilitaire.montantCamions(camcha); 
+        System.out.println((Utilitaire.montantCamions(camcha))*10);
+        System.out.println(Utilitaire.montantCamions(camcha));
         
         //AGE
         OuvrierSel ouv2 = new OuvrierSel(1);

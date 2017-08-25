@@ -52,6 +52,9 @@ import com.itextpdf.text.pdf.GrayColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import db.dto.OuvrierDto;
+import db.selDto.CamionDuChantierSel;
+import db.selDto.OuvrierSel;
 
 /**
  * FXML Controller class
@@ -183,19 +186,20 @@ public class DevisOverviewController implements Initializable {
                     statut.setText(devis.getStatut());
                     date.setText(devis.getDateDevis().toString());
                     idChantier.setText(Integer.toString(devis.getIdChantier()));
-                    calculCoutOuvrier();
+
+                    OuvrierDuChantierSel sel = new OuvrierDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
+                    Double montantOuvrier = Utilitaire.montantOuvriers(sel);
+                    ouvrier.setText(montantOuvrier.toString());
+                    
+                    CamionDuChantierSel cs = new CamionDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
+                    Double montantCamion = Utilitaire.montantCamions(cs);
+                    camion.setText(montantCamion.toString());
+                    
+                    Double montantTotalHtva = (montantOuvrier + montantCamion);
+                    Double montantTotal = montantTotalHtva + montantTotalHtva * 0.21;
+                    total.setText(montantTotal.toString());
                 }
             });
-        } catch (DevisChantierBusinessException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-    
-    private void calculCoutOuvrier(){
-        OuvrierDuChantierSel sel = new OuvrierDuChantierSel(Integer.parseInt(idChantier.getText()));
-        try {
-            Collection<OuvrierDuChantierDto> ouvChantier = FacadeDB.findOuvriersDuChantierBySel(sel);
-            
         } catch (DevisChantierBusinessException ex) {
             System.out.println(ex.getMessage());
         }
@@ -203,8 +207,8 @@ public class DevisOverviewController implements Initializable {
 
     @FXML
     private void creerPdf(ActionEvent event) {
-    {
-        Document document = new Document(PageSize.A4);
+        {
+            Document document = new Document(PageSize.A4);
             try {
                 PdfWriter.getInstance(document, new FileOutputStream("C:/Users/Public/DevisChantier.pdf"));
                 document.open();

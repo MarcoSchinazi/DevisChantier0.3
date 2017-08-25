@@ -192,6 +192,24 @@ public class FacadeDB {
             }
         }
     }
+    
+    public static Collection<CamionDuChantierDto> findCamionsDuChantierBySel(CamionDuChantierSel sel) throws DevisChantierBusinessException {
+        try {
+            DBManager.startTransaction();
+            Collection<CamionDuChantierDto> col = CamionDuChantierBL.findBySel(sel);
+            DBManager.validateTransaction();
+            return col;
+        } catch (DevisChantierDbException lDB) {
+            String msg = lDB.getMessage();
+            try {
+                DBManager.cancelTransaction();
+            } catch (DevisChantierDbException ex) {
+                msg = ex.getMessage() + "\n" + msg;
+            } finally {
+                throw new DevisChantierBusinessException("CamionDuChantier par ID introuvable ! \n" + msg);
+            }
+        }
+    }
 
     public static int addCamionDuChantier(CamionDuChantierDto cachaDto) throws DevisChantierBusinessException {
         try {

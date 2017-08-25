@@ -55,6 +55,7 @@ import db.dto.ClientDto;
 import db.dto.ChantierDto;
 
 import java.sql.Date;
+import java.util.Collection;
 
 /**
  *
@@ -418,19 +419,31 @@ public class Utilitaire {
         return creation;
     }
 
-    public static double montantOuvriers(OuvrierSel sel1, OuvrierDuChantierSel sel2) {
+    public static double montantOuvriers(OuvrierDto dto, OuvrierDuChantierDto dto2) {
         double cout = 0;
         double nombreHeures = 0;
         double montantTot = 0;
 
+        cout = dto.getRemuneration();
+        nombreHeures = dto2.getNombreHeures();
+        montantTot = cout * nombreHeures;
+
+        return montantTot;
+    }
+
+    public static Double montantOuvriers(OuvrierDuChantierSel sel) {
+        Double montantTot = 0.0;
         try {
-            OuvrierDto ouv = FacadeDB.findOuvrierBySel(sel1);
-            cout = ouv.getRemuneration();
-
-            OuvrierDuChantierDto ouvcha = FacadeDB.findOuvrierDuChantierBySel(sel2);
-            nombreHeures = ouvcha.getNombreHeures();
-            montantTot = cout * nombreHeures;
-
+            Collection<OuvrierDuChantierDto> ouvChantier = FacadeDB.findOuvriersDuChantierBySel(sel);
+            for (OuvrierDuChantierDto o : ouvChantier) {
+                double nombreHeures = 0;
+                double cout = 0;
+                OuvrierSel s = new OuvrierSel(o.getIdOuvrier());
+                OuvrierDto ouvrier = FacadeDB.findOuvrierBySel(s);
+                cout = ouvrier.getRemuneration();
+                nombreHeures = o.getNombreHeures();
+                montantTot += cout * nombreHeures;
+            }
         } catch (DevisChantierBusinessException ex) {
             System.out.println(ex.getMessage());
         }
@@ -690,21 +703,20 @@ public class Utilitaire {
         }
         return false;
     }
-
-    /*Camions*/
-    public static double montantCamions(CamionSel cam, CamionDuChantierSel sel) {
-        double montant = 0;
-        double nombreHeures = 0;
-        double montantTot = 0;
-
+    
+    public static Double montantCamions(CamionDuChantierSel sel) {
+        Double montantTot = 0.0;
         try {
-            CamionDto eng = FacadeDB.findCamionBySel(cam);
-            montant = eng.getPrixHtva();
-
-            CamionDuChantierDto camcha = FacadeDB.findCamionDuChantierBySel(sel);
-            nombreHeures = camcha.getNombreHeures();
-            montantTot = nombreHeures * montant;
-
+            Collection<CamionDuChantierDto> camChantier = FacadeDB.findCamionsDuChantierBySel(sel);
+            for (CamionDuChantierDto o : camChantier) {
+                double nombreHeures = 0;
+                double cout = 0;
+                CamionSel s = new CamionSel(o.getIdCamion());
+                CamionDto camion = FacadeDB.findCamionBySel(s);
+                cout = camion.getPrixHtva();
+                nombreHeures = o.getNombreHeures();
+                montantTot += cout * nombreHeures;
+            }
         } catch (DevisChantierBusinessException ex) {
             System.out.println(ex.getMessage());
         }
