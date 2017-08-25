@@ -88,9 +88,11 @@
                       <Button fx:id="nouveau" mnemonicParsing="false" onAction="#gererNouveau" text="Nouveau" />
                         <Button fx:id="editer" mnemonicParsing="false" onAction="#gererEditer" text="Editer" />
                         <Button fx:id="supprimer" mnemonicParsing="false" onAction="#gererSupprimer" text="Supprimer" />
+                        <Button fx:id="pdf" mnemonicParsing="false" onAction="#creerPdf" text="Créer PDF" />
                     </buttons>
                   </ButtonBar>
                   <Label fx:id="message" layoutX="341.0" layoutY="272.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="20.0" />
+                  <Label fx:id="messagePdf" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="10.0" />
                </children>
             </AnchorPane>
         </items>

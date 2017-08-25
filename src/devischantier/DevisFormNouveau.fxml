@@ -39,7 +39,6 @@
       <Button fx:id="valider" layoutX="400.0" layoutY="338.0" mnemonicParsing="false" onAction="#validation" text="Valider" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="90.0" />
       <Button fx:id="annuler" layoutX="463.0" layoutY="338.0" mnemonicParsing="false" onAction="#annulation" text="Annuler" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
       <Label fx:id="message" layoutX="27.0" layoutY="343.0" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="10.0" />
-      <Button fx:id="pdf" layoutX="535.0" layoutY="540.0" mnemonicParsing="false" onAction="#creerPdf" text="Créer PDF" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="200.0" />
       <ButtonBar buttonMinWidth="100.0" layoutX="300.0" layoutY="180.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="170.0">
         <buttons>
           <Button fx:id="ajoutConducteur" mnemonicParsing="false" onAction="#goToDevisAjoutConducteur" text="Conducteur" />
@@ -58,6 +57,5 @@
             <Button fx:id="ajoutChantier" mnemonicParsing="false" onAction="#goToDevisAjoutChantier" text="Chantier" />
         </buttons>
       </ButtonBar>
-      <Label fx:id="messagePdf" layoutX="493.0" layoutY="569.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="280.0" />
    </children>
 </AnchorPane>
