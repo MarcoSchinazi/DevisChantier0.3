@@ -12,10 +12,17 @@ package db.selDto;
 public class EnginDuChantierSel {
     
     private int idEnginDuChantier;
+    private int idEngin;
+    private int idChantier;
 
     public EnginDuChantierSel(int idEnginDuChantier) {
         this.idEnginDuChantier = idEnginDuChantier;
     }
+
+    public EnginDuChantierSel(int idChantier, String c) {
+        this.idChantier = idChantier;
+    }
+    
 
     public int getIdEnginDuChantier() {
         return idEnginDuChantier;

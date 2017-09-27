@@ -10,17 +10,22 @@ package db.selDto;
  * @author Vali
  */
 public class MateriauDuChantierSel {
-    
+
     private int idMateriauDuChantier;
+    private int idMateriau;
+    private int idChantier;
 
     public MateriauDuChantierSel(int idMateriauDuChantier) {
         this.idMateriauDuChantier = idMateriauDuChantier;
     }
 
+    public MateriauDuChantierSel(int idChantier, String c) {
+        this.idChantier = idChantier;
+    }
+    
+
     public int getIdMateriauDuChantier() {
         return idMateriauDuChantier;
     }
-    
-    
-    
+
 }

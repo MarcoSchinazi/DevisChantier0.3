@@ -63,22 +63,19 @@ import java.util.Collection;
  */
 public class Utilitaire {
 
-    /*Engins*/
-    public static double montantEngins(EnginSel engin, EnginDuChantierSel sel) {
-        double montant = 0;
-        double quantite = 0;
-        double nombreHeures = 0;
-        double montantTot = 0;
-
+    public static Double montantEngins(EnginDuChantierSel sel) {
+        Double montantTot = 0.0;
         try {
-            EnginDto eng = FacadeDB.findEnginBySel(engin);
-            montant = eng.getPrixHeure();
-
-            EnginDuChantierDto engCha = FacadeDB.findEnginDuChantierBySel(sel);
-            quantite = engCha.getQuantite();
-            nombreHeures = engCha.getNombreHeures();
-            montantTot = nombreHeures * quantite * montant;
-
+            Collection<EnginDuChantierDto> engChantier = FacadeDB.findEnginsDuChantierBySel(sel);
+            for (EnginDuChantierDto o : engChantier) {
+                double nombreHeures = 0;
+                double cout = 0;
+                EnginSel s = new EnginSel(o.getIdEngin());
+                EnginDto dto = FacadeDB.findEnginBySel(s);
+                cout = dto.getPrixHeure();
+                nombreHeures = o.getNombreHeures();
+                montantTot += cout * nombreHeures * o.getQuantite();
+            }
         } catch (DevisChantierBusinessException ex) {
             System.out.println(ex.getMessage());
         }
@@ -147,19 +144,17 @@ public class Utilitaire {
     }
 
     /*Materiaux*/
-    public static double montantMateriaux(MateriauSel sel1, MateriauDuChantierSel sel2) {
-        double montant = 0;
-        double quantite = 0;
-        double montantTot = 0;
-
+    public static Double montantMateriaux(MateriauDuChantierSel sel) {
+        Double montantTot = 0.0;
         try {
-            MateriauDto eng = FacadeDB.findMateriauBySel(sel1);
-            montant = eng.getPrixHtva();
-
-            MateriauDuChantierDto matCha = FacadeDB.findMateriauDuChantierBySel(sel2);
-            quantite = matCha.getQuantite();
-            montantTot = quantite * montant;
-
+            Collection<MateriauDuChantierDto> chantier = FacadeDB.findMateriauxDuChantierBySel(sel);
+            for (MateriauDuChantierDto o : chantier) {
+                double cout = 0;
+                MateriauSel s = new MateriauSel(o.getIdMateriau());
+                MateriauDto dto = FacadeDB.findMateriauBySel(s);
+                cout = dto.getPrixHtva();
+                montantTot += cout * o.getQuantite();
+            }
         } catch (DevisChantierBusinessException ex) {
             System.out.println(ex.getMessage());
         }
@@ -228,19 +223,17 @@ public class Utilitaire {
     }
 
     /*Petits Materiels*/
-    public static double montantPetitsMateriels(PetitMaterielSel sel1, PetitMaterielDuChantierSel sel2) {
-        double montant = 0;
-        double quantite = 0;
-        double montantTot = 0;
-
+    public static Double montantPetitsMateriels(PetitMaterielDuChantierSel sel) {
+        Double montantTot = 0.0;
         try {
-            PetitMaterielDto eng = FacadeDB.findPetitMaterielBySel(sel1);
-            montant = eng.getPrixHtva();
-
-            PetitMaterielDuChantierDto pema = FacadeDB.findPetitMaterielDuChantierBySel(sel2);
-            quantite = pema.getQuantite();
-            montantTot = quantite * montant;
-
+            Collection<PetitMaterielDuChantierDto> chantier = FacadeDB.findPetitsMaterielsDuChantierBySel(sel);
+            for (PetitMaterielDuChantierDto o : chantier) {
+                double cout = 0;
+                PetitMaterielSel s = new PetitMaterielSel(o.getIdPetitMateriel());
+                PetitMaterielDto dto = FacadeDB.findPetitMaterielBySel(s);
+                cout = dto.getPrixHtva();
+                montantTot += cout * o.getQuantite();
+            }
         } catch (DevisChantierBusinessException ex) {
             System.out.println(ex.getMessage());
         }
@@ -309,19 +302,17 @@ public class Utilitaire {
     }
 
     /*Codes References*/
-    public static double montantCodesReferences(CodeReferenceSel sel1, CodeReferenceDuChantierSel sel2) {
-        double montant = 0;
-        double quantite = 0;
-        double montantTot = 0;
-
+    public static Double montantCodesReferences(CodeReferenceDuChantierSel sel) {
+        Double montantTot = 0.0;
         try {
-            CodeReferenceDto eng = FacadeDB.findCodeReferenceBySel(sel1);
-            montant = eng.getPrixHtva();
-
-            CodeReferenceDuChantierDto pema = FacadeDB.findCodeReferenceDuChantierBySel(sel2);
-            quantite = pema.getQuantite();
-            montantTot = quantite * montant;
-
+            Collection<CodeReferenceDuChantierDto> chantier = FacadeDB.findCodesReferencesDuChantierBySel(sel);
+            for (CodeReferenceDuChantierDto o : chantier) {
+                double cout = 0;
+                CodeReferenceSel s = new CodeReferenceSel(o.getIdCodeReference());
+                CodeReferenceDto dto = FacadeDB.findCodeReferenceBySel(s);
+                cout = dto.getPrixHtva();
+                montantTot += cout * o.getQuantite();
+            }
         } catch (DevisChantierBusinessException ex) {
             System.out.println(ex.getMessage());
         }
@@ -356,23 +347,6 @@ public class Utilitaire {
             System.out.println(ex.getMessage());
         }
         return false;
-    }
-
-    public static double supplement(CodeReferenceSel sel1, CodeReferenceDuChantierSel sel2, int supp) {
-        double montant = 0;
-        double quantite = 0;
-        double montantTot = 0;
-        try {
-            CodeReferenceDto eng = FacadeDB.findCodeReferenceBySel(sel1);
-            montant = eng.getPrixHtva();
-            CodeReferenceDuChantierDto pema = FacadeDB.findCodeReferenceDuChantierBySel(sel2);
-            quantite = pema.getQuantite();
-            montantTot = montant * quantite * supp;
-        } catch (DevisChantierBusinessException ex) {
-            System.out.println(ex.getMessage());
-        }
-        System.out.println(montantTot);
-        return montantTot;
     }
 
     /*CodesReferencesDuChantier*/
@@ -417,18 +391,6 @@ public class Utilitaire {
             System.out.println(ex.getMessage());
         }
         return creation;
-    }
-
-    public static double montantOuvriers(OuvrierDto dto, OuvrierDuChantierDto dto2) {
-        double cout = 0;
-        double nombreHeures = 0;
-        double montantTot = 0;
- 
-        cout = dto.getRemuneration();
-        nombreHeures = dto2.getNombreHeures();
-        montantTot = cout * nombreHeures;
-
-        return montantTot;
     }
 
     public static Double montantOuvriers(OuvrierDuChantierSel sel) {
@@ -512,19 +474,17 @@ public class Utilitaire {
     }
 
     /*Conducteurs*/
-    public static double montantConducteurs(ConducteurSel sel1, ConducteurDuChantierSel sel2) {
-        double cout = 0;
-        double nombreHeures = 0;
-        double montantTot = 0;
-
+    public static Double montantConducteurs(ConducteurDuChantierSel sel) {
+        Double montantTot = 0.0;
         try {
-            ConducteurDto con = FacadeDB.findConducteurBySel(sel1);
-            cout = con.getRemuneration();
-
-            ConducteurDuChantierDto concha = FacadeDB.findConducteurDuChantierBySel(sel2);
-            nombreHeures = concha.getNombreHeures();
-            montantTot = cout * nombreHeures;
-
+            Collection<ConducteurDuChantierDto> chantier = FacadeDB.findConducteursDuChantierBySel(sel);
+            for (ConducteurDuChantierDto o : chantier) {
+                double cout = 0;
+                ConducteurSel s = new ConducteurSel(o.getIdConducteur());
+                ConducteurDto dto = FacadeDB.findConducteurBySel(s);
+                cout = dto.getRemuneration();
+                montantTot += cout * o.getNombreHeures();
+            }
         } catch (DevisChantierBusinessException ex) {
             System.out.println(ex.getMessage());
         }
@@ -624,19 +584,17 @@ public class Utilitaire {
     }
 
     /*Voitures*/
-    public static double montantVoitures(VoitureSel voit, VoitureDuChantierSel sel) {
-        double montant = 0;
-        double nombreJours = 0;
-        double montantTot = 0;
-
+     public static Double montantVoitures(VoitureDuChantierSel sel) {
+        Double montantTot = 0.0;
         try {
-            VoitureDto eng = FacadeDB.findVoitureBySel(voit);
-            montant = eng.getPrixHtva();
-
-            VoitureDuChantierDto voiCha = FacadeDB.findVoitureDuChantierBySel(sel);
-            nombreJours = voiCha.getNombreJours();
-            montantTot = nombreJours * montant;
-
+            Collection<VoitureDuChantierDto> chantier = FacadeDB.findVoituresDuChantierBySel(sel);
+            for (VoitureDuChantierDto o : chantier) {
+                double cout = 0;
+                VoitureSel s = new VoitureSel(o.getIdVoiture());
+                VoitureDto dto = FacadeDB.findVoitureBySel(s);
+                cout = dto.getPrixHtva();
+                montantTot += cout * o.getNombreJours();
+            }
         } catch (DevisChantierBusinessException ex) {
             System.out.println(ex.getMessage());
         }

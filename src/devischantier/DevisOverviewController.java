@@ -10,12 +10,9 @@ import db.dto.DevisDto;
 import db.dto.OuvrierDuChantierDto;
 import db.exception.DevisChantierBusinessException;
 import db.selDto.OuvrierDuChantierSel;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -52,9 +49,20 @@ import com.itextpdf.text.pdf.GrayColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import db.dto.OuvrierDto;
+import db.dto.CamionDuChantierDto;
+import db.dto.CodeReferenceDuChantierDto;
+import db.dto.ConducteurDuChantierDto;
+import db.dto.EnginDuChantierDto;
+import db.dto.MateriauDuChantierDto;
+import db.dto.PetitMaterielDuChantierDto;
+import db.dto.VoitureDuChantierDto;
 import db.selDto.CamionDuChantierSel;
-import db.selDto.OuvrierSel;
+import db.selDto.CodeReferenceDuChantierSel;
+import db.selDto.ConducteurDuChantierSel;
+import db.selDto.EnginDuChantierSel;
+import db.selDto.MateriauDuChantierSel;
+import db.selDto.PetitMaterielDuChantierSel;
+import db.selDto.VoitureDuChantierSel;
 
 /**
  * FXML Controller class
@@ -159,6 +167,50 @@ public class DevisOverviewController implements Initializable {
     @FXML
     private void gererSupprimer(ActionEvent event) {
         DevisDto devis = idDesignationId.getSelectionModel().selectedItemProperty().get();
+        try {
+            OuvrierDuChantierSel oSel = new OuvrierDuChantierSel(devis.getIdChantier(), "argFactice");
+            Collection<OuvrierDuChantierDto> ouvriers = FacadeDB.findOuvriersDuChantierBySel(oSel);
+            for (OuvrierDuChantierDto ouv : ouvriers) {
+                Utilitaire.deleteOuvrierDuChantier(ouv.getId());
+            }
+            CamionDuChantierSel cSel = new CamionDuChantierSel(devis.getIdChantier(), "argFactice");
+            Collection<CamionDuChantierDto> camions = FacadeDB.findCamionsDuChantierBySel(cSel);
+            for (CamionDuChantierDto cam : camions) {
+                Utilitaire.deleteCamionDuChantier(cam.getId());
+            }
+            MateriauDuChantierSel mSel = new MateriauDuChantierSel(devis.getIdChantier(), "argFactice");
+            Collection<MateriauDuChantierDto> materiaux = FacadeDB.findMateriauxDuChantierBySel(mSel);
+            for (MateriauDuChantierDto mat : materiaux) {
+                Utilitaire.deleteMateriauDuChantier(mat.getId());
+            }
+            EnginDuChantierSel eSel = new EnginDuChantierSel(devis.getIdChantier(), "argFactice");
+            Collection<EnginDuChantierDto> engins = FacadeDB.findEnginsDuChantierBySel(eSel);
+            for (EnginDuChantierDto eng : engins) {
+                Utilitaire.deleteEnginDuChantier(eng.getId());
+            }
+            PetitMaterielDuChantierSel pSel = new PetitMaterielDuChantierSel(devis.getIdChantier(), "argFactice");
+            Collection<PetitMaterielDuChantierDto> pMateriels = FacadeDB.findPetitsMaterielsDuChantierBySel(pSel);
+            for (PetitMaterielDuChantierDto pMat : pMateriels) {
+                Utilitaire.deletePetitMaterielDuChantier(pMat.getId());
+            }
+            VoitureDuChantierSel vSel = new VoitureDuChantierSel(devis.getIdChantier(), "argFactice");
+            Collection<VoitureDuChantierDto> voitures = FacadeDB.findVoituresDuChantierBySel(vSel);
+            for (VoitureDuChantierDto voit : voitures) {
+                Utilitaire.deleteVoitureDuChantier(voit.getId());
+            }
+            CodeReferenceDuChantierSel rSel = new CodeReferenceDuChantierSel(devis.getIdChantier(), "argFactice");
+            Collection<CodeReferenceDuChantierDto> codes = FacadeDB.findCodesReferencesDuChantierBySel(rSel);
+            for (CodeReferenceDuChantierDto ref : codes) {
+                Utilitaire.deleteCodeReferenceDuChantier(ref.getId());
+            }
+            ConducteurDuChantierSel condSel = new ConducteurDuChantierSel(devis.getIdChantier(), "argFactice");
+            Collection<ConducteurDuChantierDto> conducteurs = FacadeDB.findConducteursDuChantierBySel(condSel);
+            for (ConducteurDuChantierDto cond : conducteurs) {
+                Utilitaire.deleteConducteurDuChantier(cond.getId());
+            }
+        } catch (DevisChantierBusinessException ex) {
+            System.out.println(ex.getMessage());
+        }
         if (Utilitaire.deleteDevis(devis.getId())) {
             message.setText("Suppression avec succès !");
         } else {

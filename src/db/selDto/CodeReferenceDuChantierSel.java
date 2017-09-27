@@ -11,11 +11,18 @@ package db.selDto;
  */
 public class CodeReferenceDuChantierSel {
     
-    private int idCodeReferenceDuChantier;
+    private int idCodeReferenceDuChantier;    
+    private int idCodeRef;
+    private int idChantier;
 
     public CodeReferenceDuChantierSel(int idCodeReferenceDuChantier) {
         this.idCodeReferenceDuChantier = idCodeReferenceDuChantier;
     }
+
+    public CodeReferenceDuChantierSel(int idChantier, String c) {
+        this.idChantier = idChantier;
+    }
+    
 
     public int getIdCodeReferenceDuChantier() {
         return idCodeReferenceDuChantier;

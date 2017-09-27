@@ -122,20 +122,43 @@ public class DevisFormController implements Initializable {
             listChantiers.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
                 @Override
                 public void handle(javafx.scene.input.MouseEvent event) {
-                    ChantierDto chantier = listChantiers.getSelectionModel().selectedItemProperty().get();
-                    idChantier = chantier.getId();
-                    System.out.println(idChantier);
-                    ajoutOuvrier.setDisable(false);
-                    ajoutEngin.setDisable(false);
-                    ajoutMateriau.setDisable(false);
-                    ajoutPetitMateriel.setDisable(false);
-                    ajoutCodeReference.setDisable(false);
-                    ajoutVoiture.setDisable(false);
-                    ajoutCamion.setDisable(false);
-                    ajoutConducteur.setDisable(false);
+                    try {
+                        ChantierDto chantier = listChantiers.getSelectionModel().selectedItemProperty().get();
+                        idChantier = chantier.getId();
+                        Collection<DevisDto> devis = FacadeDB.getAllDevis();
+                        boolean exist = false;
+                        for (DevisDto dev : devis) {
+                            if (chantier.getId() == dev.getIdChantier()) {
+                                exist = true;
+                            }
+                        }
+                        if (!exist) {
+                            ajoutOuvrier.setDisable(false);
+                            ajoutEngin.setDisable(false);
+                            ajoutMateriau.setDisable(false);
+                            ajoutPetitMateriel.setDisable(false);
+                            ajoutCodeReference.setDisable(false);
+                            ajoutVoiture.setDisable(false);
+                            ajoutCamion.setDisable(false);
+                            ajoutConducteur.setDisable(false);
+                            valider.setDisable(false);
+                        } else {
+                            ajoutOuvrier.setDisable(true);
+                            ajoutEngin.setDisable(true);
+                            ajoutMateriau.setDisable(true);
+                            ajoutPetitMateriel.setDisable(true);
+                            ajoutCodeReference.setDisable(true);
+                            ajoutVoiture.setDisable(true);
+                            ajoutCamion.setDisable(true);
+                            ajoutConducteur.setDisable(true);
+                            valider.setDisable(true);
+                        }
+                    } catch (DevisChantierBusinessException ex) {
+                        System.out.println(ex.getMessage());
+                    }
                 }
             });
-
+            
         } catch (DevisChantierBusinessException ex) {
             System.out.println(ex.getMessage());
         }

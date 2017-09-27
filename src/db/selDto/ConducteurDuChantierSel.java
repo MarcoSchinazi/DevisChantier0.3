@@ -14,10 +14,17 @@ import java.sql.Date;
 public class ConducteurDuChantierSel {
     
     private int idConducteurDuChantier;
-
+    private int idMateriau;
+    private int idChantier;
+    
     public ConducteurDuChantierSel(int idConducteurDuChantier) {
         this.idConducteurDuChantier = idConducteurDuChantier;
     }
+
+    public ConducteurDuChantierSel(int idChantier, String c) {
+        this.idChantier = idChantier;
+    }
+    
 
     public int getIdConducteurDuChantier() {
         return idConducteurDuChantier;

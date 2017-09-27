@@ -583,16 +583,12 @@ public class FacadeDB {
             
     }
 
-    public static CodeReferenceDuChantierDto findCodeReferenceDuChantierBySel(CodeReferenceDuChantierSel sel) throws DevisChantierBusinessException {
+    public static Collection<CodeReferenceDuChantierDto> findCodesReferencesDuChantierBySel(CodeReferenceDuChantierSel sel) throws DevisChantierBusinessException {
         try {
             DBManager.startTransaction();
             Collection<CodeReferenceDuChantierDto> col = CodeReferenceDuChantierBL.findBySel(sel);
-            CodeReferenceDuChantierDto ldto = null;
-            if (col.size() == 1) {
-                ldto = col.iterator().next();
-            }
             DBManager.validateTransaction();
-            return ldto;
+            return col;
         } catch (DevisChantierDbException lDB) {
             String msg = lDB.getMessage();
             try {
@@ -772,16 +768,12 @@ public class FacadeDB {
             
     }
 
-    public static ConducteurDuChantierDto findConducteurDuChantierBySel(ConducteurDuChantierSel sel) throws DevisChantierBusinessException {
+    public static Collection<ConducteurDuChantierDto> findConducteursDuChantierBySel(ConducteurDuChantierSel sel) throws DevisChantierBusinessException {
         try {
             DBManager.startTransaction();
             Collection<ConducteurDuChantierDto> col = ConducteurDuChantierBL.findBySel(sel);
-            ConducteurDuChantierDto ldto = null;
-            if (col.size() == 1) {
-                ldto = col.iterator().next();
-            }
             DBManager.validateTransaction();
-            return ldto;
+            return col;
         } catch (DevisChantierDbException lDB) {
             String msg = lDB.getMessage();
             try {
@@ -1060,16 +1052,12 @@ public class FacadeDB {
             
     }
 
-    public static EnginDuChantierDto findEnginDuChantierBySel(EnginDuChantierSel sel) throws DevisChantierBusinessException {
+    public static Collection<EnginDuChantierDto> findEnginsDuChantierBySel(EnginDuChantierSel sel) throws DevisChantierBusinessException {
         try {
             DBManager.startTransaction();
             Collection<EnginDuChantierDto> col = EnginDuChantierBL.findBySel(sel);
-            EnginDuChantierDto ldto = null;
-            if (col.size() == 1) {
-                ldto = col.iterator().next();
-            }
             DBManager.validateTransaction();
-            return ldto;
+            return col;
         } catch (DevisChantierDbException lDB) {
             String msg = lDB.getMessage();
             try {
@@ -1252,16 +1240,12 @@ public class FacadeDB {
             
     }
 
-    public static MateriauDuChantierDto findMateriauDuChantierBySel(MateriauDuChantierSel matcha) throws DevisChantierBusinessException {
+    public static Collection<MateriauDuChantierDto> findMateriauxDuChantierBySel(MateriauDuChantierSel matcha) throws DevisChantierBusinessException {
         try {
             DBManager.startTransaction();
             Collection<MateriauDuChantierDto> col = MateriauDuChantierBL.findBySel(matcha);
-            MateriauDuChantierDto ldto = null;
-            if (col.size() == 1) {
-                ldto = col.iterator().next();
-            }
             DBManager.validateTransaction();
-            return ldto;
+            return col;
         } catch (DevisChantierDbException lDB) {
             String msg = lDB.getMessage();
             try {
@@ -1740,16 +1724,12 @@ public class FacadeDB {
             
     }
 
-    public static PetitMaterielDuChantierDto findPetitMaterielDuChantierBySel(PetitMaterielDuChantierSel sel) throws DevisChantierBusinessException {
+    public static Collection<PetitMaterielDuChantierDto> findPetitsMaterielsDuChantierBySel(PetitMaterielDuChantierSel sel) throws DevisChantierBusinessException {
         try {
             DBManager.startTransaction();
             Collection<PetitMaterielDuChantierDto> col = PetitMaterielDuChantierBL.findBySel(sel);
-            PetitMaterielDuChantierDto ldto = null;
-            if (col.size() == 1) {
-                ldto = col.iterator().next();
-            }
             DBManager.validateTransaction();
-            return ldto;
+            return col;
         } catch (DevisChantierDbException lDB) {
             String msg = lDB.getMessage();
             try {
@@ -1928,16 +1908,12 @@ public class FacadeDB {
             
     }
 
-    public static VoitureDuChantierDto findVoitureDuChantierBySel(VoitureDuChantierSel sel) throws DevisChantierBusinessException {
+    public static Collection<VoitureDuChantierDto> findVoituresDuChantierBySel(VoitureDuChantierSel sel) throws DevisChantierBusinessException {
         try {
             DBManager.startTransaction();
             Collection<VoitureDuChantierDto> col = VoitureDuChantierBL.findBySel(sel);
-            VoitureDuChantierDto ldto = null;
-            if (col.size() == 1) {
-                ldto = col.iterator().next();
-            }
             DBManager.validateTransaction();
-            return ldto;
+            return col;
         } catch (DevisChantierDbException lDB) {
             String msg = lDB.getMessage();
             try {
