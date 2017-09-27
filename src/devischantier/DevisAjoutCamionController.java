@@ -7,9 +7,12 @@ package devischantier;
 
 import db.business.FacadeDB;
 import db.dto.CamionDto;
+import db.dto.CamionDuChantierDto;
 import db.exception.DevisChantierBusinessException;
-import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -17,9 +20,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -27,17 +28,22 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Utilitaire;
 
 /**
  * FXML Controller class
  *
- * @author Vali
+ * @author demaj
  */
-public class CamionOverviewController implements Initializable {
+public class DevisAjoutCamionController implements Initializable {
 
+    @FXML
+    private TableView<CamionDto> table;
+    @FXML
+    private TableColumn<CamionDto, String> colonneId;
+    @FXML
+    private TableColumn<CamionDto, String> colonneMarque;
     @FXML
     private Label id;
     @FXML
@@ -57,83 +63,29 @@ public class CamionOverviewController implements Initializable {
     @FXML
     private Label capacite;
     @FXML
-    private Label message;
-
-    @FXML
-    private TableView<CamionDto> table;
-    @FXML
-    private TableColumn<CamionDto, String> colonneId;
-    @FXML
-    private TableColumn<CamionDto, String> colonneMarque;
-    @FXML
     private Button valider;
     @FXML
-    private Button editer;
+    private Label message;
     @FXML
     private Label idChantier;
     @FXML
-    private TextField nbrHeures;
+    private TextField quantite;
     @FXML
-    private DatePicker dateDebut;
+    private DatePicker debutDisponibilite;
     @FXML
-    private DatePicker dateFin;
+    private DatePicker finDisponibilite;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        editer.setDisable(true);
         displayList();
+        valider.setDisable(true);
     }
 
-    @FXML
-    private void gererNouveau(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(DevisChantier.class.getResource("CamionFormNouveau.fxml"));
-        AnchorPane camionInfo;
-        try {
-            camionInfo = (AnchorPane) loader.load();
-            Stage stage = new Stage();
-            Scene scene = new Scene(camionInfo);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    @FXML
-    private void gererEditer(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(DevisChantier.class.getResource("CamionFormEditer.fxml"));
-        AnchorPane camionInfo;
-        try {
-            camionInfo = (AnchorPane) loader.load();
-
-            //passer l'id du camion actuellement sélectionné à CamionFormEditerController
-            if (id != null) {
-                CamionFormEditerController controller = loader.<CamionFormEditerController>getController();
-                controller.initVariables(Integer.parseInt(id.getText()));
-            }
-            Stage stage = new Stage();
-            Scene scene = new Scene(camionInfo);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    @FXML
-    private void gererSupprimer(ActionEvent event) {
-        CamionDto camion = table.getSelectionModel().selectedItemProperty().get();
-        if (Utilitaire.deleteCamion(camion.getId())) {
-            message.setText("Suppression avec succès !");
-        } else {
-            message.setText("Erreur de suppression ...!");
-        }
+    public void initVariables(int idChantier) {
+        this.idChantier.setText(Integer.toString(idChantier));
     }
 
     private void displayList() {
@@ -149,7 +101,6 @@ public class CamionOverviewController implements Initializable {
                 @Override
                 public void handle(javafx.scene.input.MouseEvent event) {
                     CamionDto camion = table.getSelectionModel().selectedItemProperty().get();
-                    editer.setDisable(false);
                     id.setText(camion.getId().toString());
                     categorie.setText(camion.getCategorie());
                     marque.setText(camion.getMarque());
@@ -159,11 +110,34 @@ public class CamionOverviewController implements Initializable {
                     tonnage.setText(Integer.toString(camion.getTonnage()));
                     carburant.setText(camion.getCarburant());
                     capacite.setText(Double.toString(camion.getCapacite()));
+                    valider.setDisable(false);
                 }
             });
         } catch (DevisChantierBusinessException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    @FXML
+    private void gererValider(ActionEvent event) {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            System.out.println(debutDisponibilite.getValue().toString());
+            java.util.Date parsed = (java.util.Date) format.parse(debutDisponibilite.getValue().toString());
+            java.sql.Date dateD = new Date(parsed.getTime());
+
+            java.util.Date parsed2 = (java.util.Date) format.parse(finDisponibilite.getValue().toString());
+            java.sql.Date dateF = new Date(parsed2.getTime());
+
+            CamionDuChantierDto camion = new CamionDuChantierDto(1000, dateD, dateF, Double.parseDouble(quantite.getText()),
+            Integer.parseInt(idChantier.getText()), Integer.parseInt(id.getText()));
+            Utilitaire.insertCamionDuChantier(camion);
+            Stage stage = (Stage) valider.getScene().getWindow();
+            stage.close();
+        } catch (ParseException ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
 
 }

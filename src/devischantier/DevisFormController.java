@@ -62,8 +62,6 @@ public class DevisFormController implements Initializable {
     @FXML
     private Button ajoutConducteur;
     @FXML
-    private Button ajoutClient;
-    @FXML
     private Button ajoutEngin;
     @FXML
     private Button ajoutMateriau;
@@ -78,8 +76,6 @@ public class DevisFormController implements Initializable {
     @FXML
     private Button ajoutChantier;
 
-
-
     /**
      * Initializes the controller class.
      */
@@ -88,7 +84,6 @@ public class DevisFormController implements Initializable {
         // TODO
         displayChantiers();
         ajoutOuvrier.setDisable(true);
-        ajoutClient.setDisable(true);
         ajoutEngin.setDisable(true);
         ajoutMateriau.setDisable(true);
         ajoutPetitMateriel.setDisable(true);
@@ -131,7 +126,6 @@ public class DevisFormController implements Initializable {
                     idChantier = chantier.getId();
                     System.out.println(idChantier);
                     ajoutOuvrier.setDisable(false);
-                    ajoutClient.setDisable(false);
                     ajoutEngin.setDisable(false);
                     ajoutMateriau.setDisable(false);
                     ajoutPetitMateriel.setDisable(false);
@@ -175,39 +169,143 @@ public class DevisFormController implements Initializable {
 
     @FXML
     private void goToDevisAjoutConducteur(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(DevisChantier.class.getResource("DevisAjoutConducteur.fxml"));
+        AnchorPane conducteurInfo;
+        try {
+            conducteurInfo = (AnchorPane) loader.load();
+
+            DevisAjoutConducteurController controller = loader.<DevisAjoutConducteurController>getController();
+            controller.initVariables(idChantier);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(conducteurInfo);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     @FXML
-    private void goToDevisAjoutClient(ActionEvent event) {
+    private void goToDevisAjoutEngin(ActionEvent event) { 
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(DevisChantier.class.getResource("DevisAjoutEngin.fxml"));
+        AnchorPane enginInfo;
+        try {
+            enginInfo = (AnchorPane) loader.load();
+
+            DevisAjoutEnginController controller = loader.<DevisAjoutEnginController>getController();
+            controller.initVariables(idChantier);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(enginInfo);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     @FXML
-    private void goToDevisAjoutEngin(ActionEvent event) {
+    private void goToDevisAjoutMateriau(ActionEvent event) { 
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(DevisChantier.class.getResource("DevisAjoutMateriau.fxml"));
+        AnchorPane materiauInfo;
+        try {
+            materiauInfo = (AnchorPane) loader.load();
+
+            DevisAjoutMateriauController controller = loader.<DevisAjoutMateriauController>getController();
+            controller.initVariables(idChantier);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(materiauInfo);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     @FXML
-    private void goToDevisAjoutMateriau(ActionEvent event) {
+    private void goToDevisAjoutPetitMateriel(ActionEvent event) { 
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(DevisChantier.class.getResource("DevisAjoutPetitMateriel.fxml"));
+        AnchorPane petitMaterielInfo;
+        try {
+            petitMaterielInfo = (AnchorPane) loader.load();
+
+            DevisAjoutPetitMaterielController controller = loader.<DevisAjoutPetitMaterielController>getController();
+            controller.initVariables(idChantier);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(petitMaterielInfo);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        } 
     }
 
     @FXML
-    private void goToDevisAjoutPetitMateriel(ActionEvent event) {
+    private void goToDevisAjoutCodeReference(ActionEvent event) { 
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(DevisChantier.class.getResource("DevisAjoutCodeReference.fxml"));
+        AnchorPane codeReferenceInfo;
+        try {
+            codeReferenceInfo = (AnchorPane) loader.load();
+
+            DevisAjoutCodeReferenceController controller = loader.<DevisAjoutCodeReferenceController>getController();
+            controller.initVariables(idChantier);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(codeReferenceInfo);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        } 
     }
 
     @FXML
-    private void goToDevisAjoutCodeReference(ActionEvent event) {
-    }
+    private void goToDevisAjoutVoiture(ActionEvent event) { 
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(DevisChantier.class.getResource("DevisAjoutVoiture.fxml"));
+        AnchorPane voitureInfo;
+        try {
+            voitureInfo = (AnchorPane) loader.load();
 
-    @FXML
-    private void goToDevisAjoutVoiture(ActionEvent event) {
+            DevisAjoutVoitureController controller = loader.<DevisAjoutVoitureController>getController();
+            controller.initVariables(idChantier);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(voitureInfo);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        } 
     }
 
     @FXML
     private void goToDevisAjoutCamion(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(DevisChantier.class.getResource("DevisAjoutCamion.fxml"));
+        AnchorPane camionInfo;
+        try {
+            camionInfo = (AnchorPane) loader.load();
+
+            DevisAjoutCamionController controller = loader.<DevisAjoutCamionController>getController();
+            controller.initVariables(idChantier);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(camionInfo);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
-    @FXML
-    private void goToDevisAjoutChantier(ActionEvent event) {
-    }
-
-
+    
 }

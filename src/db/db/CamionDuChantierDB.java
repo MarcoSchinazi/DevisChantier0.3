@@ -63,9 +63,9 @@ public class CamionDuChantierDB {
                         rs.getInt("idCamionDuChantier"),
                         rs.getDate("debutDisponibilite"),
                         rs.getDate("finDisponibilite"),
+                        rs.getDouble("nombreHeures"),
                         rs.getInt("idChantier"),
-                        rs.getInt("idCamion"),
-                        rs.getDouble("nombreHeures")
+                        rs.getInt("idCamion")
                 )
                 );
             }

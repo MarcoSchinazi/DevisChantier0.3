@@ -69,7 +69,7 @@
                         <Label text="Coût ouvriers" GridPane.rowIndex="6" />
                         <Label text="Coût camions" GridPane.rowIndex="7" />
                         <Label text="Coût voitures" GridPane.rowIndex="8" />
-                        <Label text="Coût materiels" GridPane.rowIndex="10" />
+                        <Label text="Coût matériaux" GridPane.rowIndex="10" />
                         <Label text="Coût petit matériels" GridPane.rowIndex="11" />
                         <Label text="Coût conducteurs" GridPane.rowIndex="12" />
                         <Label fx:id="ouvrier" GridPane.columnIndex="2" GridPane.rowIndex="6" />
@@ -90,6 +90,9 @@
                         <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="11" />
                         <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                         <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                        <Label text="Coût codes de références" GridPane.rowIndex="13" />
+                        <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                        <Label fx:id="codeReference" GridPane.columnIndex="2" GridPane.rowIndex="13" />
                      </children>
                   </GridPane>
                   <ButtonBar layoutX="54.0" layoutY="250.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
@@ -102,7 +105,6 @@
                   </ButtonBar>
                   <Label fx:id="message" layoutX="341.0" layoutY="272.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="20.0" />
                   <Label fx:id="messagePdf" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="10.0" />
-                  <Label layoutX="10.0" layoutY="10.0" text="€" />
                </children>
             </AnchorPane>
         </items>

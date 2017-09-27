@@ -19,7 +19,7 @@ public class CamionDuChantierDto extends EntityDto<Integer> {
     private int idCamion;
     private double nombreHeures;
 
-    public CamionDuChantierDto(int idCamionDuChantier, Date debutDisponibilite, Date finDisponibilite, int idChantier, int idCamion, double nombreHeures) {
+    public CamionDuChantierDto(int idCamionDuChantier, Date debutDisponibilite, Date finDisponibilite, double nombreHeures, int idChantier, int idCamion ) {
         this.id = idCamionDuChantier;
         this.debutDisponibilite = debutDisponibilite;
         this.finDisponibilite = finDisponibilite;
