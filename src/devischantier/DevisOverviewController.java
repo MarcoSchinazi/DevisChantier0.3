@@ -247,6 +247,10 @@ public class DevisOverviewController implements Initializable {
                     Double montantCamion = Utilitaire.montantCamions(cs);
                     camion.setText(montantCamion.toString());
                     
+                    VoitureDuChantierSel vs = new VoitureDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
+                    Double montantVoiture = Utilitaire.montantVoitures(vs);
+                    voiture.setText(montantVoiture.toString());
+                    
                     Double montantTotalHtva = (montantOuvrier + montantCamion);
                     Double montantTotal = montantTotalHtva + montantTotalHtva * 0.21;
                     total.setText(montantTotal.toString());
