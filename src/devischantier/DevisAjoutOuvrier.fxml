@@ -23,7 +23,6 @@
                     <columns>
                       <TableColumn fx:id="idNom" prefWidth="75.0" text="Nom" />
                       <TableColumn fx:id="idPrenom" prefWidth="75.0" text="Prénom" />
-                        <TableColumn fx:id="idSelection" prefWidth="75.0" text="Sélection" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

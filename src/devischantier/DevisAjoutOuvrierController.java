@@ -51,8 +51,6 @@ public class DevisAjoutOuvrierController implements Initializable {
     @FXML
     private TableColumn<OuvrierDto, String> idPrenom;
     @FXML
-    private TableColumn<OuvrierDto, CheckBox> idSelection;
-    @FXML
     private Label id;
     @FXML
     private Label nom;
@@ -100,8 +98,6 @@ public class DevisAjoutOuvrierController implements Initializable {
     private void displayList() {
         idNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         idPrenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-        idSelection.setCellValueFactory(new PropertyValueFactory<>("check"));
-        idSelection.setCellFactory(column -> new CheckBoxTableCell());
         try {
             Collection<OuvrierDto> ouvriers = FacadeDB.getAllOuvrier();
             ObservableList<OuvrierDto> data = FXCollections.observableArrayList(ouvriers);
