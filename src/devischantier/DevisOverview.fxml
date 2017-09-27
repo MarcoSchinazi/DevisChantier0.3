@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="devischantier.DevisOverviewController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="devischantier.DevisOverviewController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="153.0" layoutY="70.0" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -34,6 +34,7 @@
                   <GridPane layoutX="43.0" layoutY="104.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="15.0" prefWidth="15.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
@@ -60,27 +61,35 @@
                         <Label text="Statut" GridPane.rowIndex="2" />
                         <Label text="Date du devis" GridPane.rowIndex="3" />
                         <Label text="Désignation" GridPane.rowIndex="4" />
-                        <Label fx:id="idDevis" text="/" GridPane.columnIndex="1" />
-                        <Label fx:id="idChantier" text="/" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="statut" text="/" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="date" text="/" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="designation" text="/" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label text="Cout ouvriers" GridPane.rowIndex="6" />
-                        <Label text="Cout Camions" GridPane.rowIndex="7" />
-                        <Label text="Cout Voitures" GridPane.rowIndex="8" />
-                        <Label text="Cout Materiel" GridPane.rowIndex="10" />
-                        <Label text="Cout PetitMateriel" GridPane.rowIndex="11" />
-                        <Label text="Cout Conducteur" GridPane.rowIndex="12" />
-                        <Label fx:id="ouvrier" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label fx:id="camion" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label fx:id="engin" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                        <Label fx:id="voiture" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Label text="Cout Engins" GridPane.rowIndex="9" />
-                        <Label fx:id="materiel" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                        <Label fx:id="petitMateriel" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                        <Label fx:id="conducteur" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                        <Label text="Cout Total" GridPane.rowIndex="15" />
-                        <Label fx:id="total" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                        <Label fx:id="idDevis" text="/" GridPane.columnIndex="2" />
+                        <Label fx:id="idChantier" text="/" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Label fx:id="statut" text="/" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <Label fx:id="date" text="/" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <Label fx:id="designation" text="/" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <Label text="Coût ouvriers" GridPane.rowIndex="6" />
+                        <Label text="Coût camions" GridPane.rowIndex="7" />
+                        <Label text="Coût voitures" GridPane.rowIndex="8" />
+                        <Label text="Coût materiels" GridPane.rowIndex="10" />
+                        <Label text="Coût petit matériels" GridPane.rowIndex="11" />
+                        <Label text="Coût conducteurs" GridPane.rowIndex="12" />
+                        <Label fx:id="ouvrier" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <Label fx:id="camion" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                        <Label fx:id="engin" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                        <Label fx:id="voiture" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                        <Label text="Coût engins" GridPane.rowIndex="9" />
+                        <Label fx:id="materiel" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                        <Label fx:id="petitMateriel" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                        <Label fx:id="conducteur" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+                        <Label text="Coût total" GridPane.rowIndex="15" />
+                        <Label fx:id="total" GridPane.columnIndex="2" GridPane.rowIndex="15" />
+                        <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                        <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                        <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="15" />
                      </children>
                   </GridPane>
                   <ButtonBar layoutX="54.0" layoutY="250.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
@@ -93,6 +102,7 @@
                   </ButtonBar>
                   <Label fx:id="message" layoutX="341.0" layoutY="272.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="20.0" />
                   <Label fx:id="messagePdf" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="10.0" />
+                  <Label layoutX="10.0" layoutY="10.0" text="€" />
                </children>
             </AnchorPane>
         </items>

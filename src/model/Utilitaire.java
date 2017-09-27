@@ -423,7 +423,7 @@ public class Utilitaire {
         double cout = 0;
         double nombreHeures = 0;
         double montantTot = 0;
-
+ 
         cout = dto.getRemuneration();
         nombreHeures = dto2.getNombreHeures();
         montantTot = cout * nombreHeures;
