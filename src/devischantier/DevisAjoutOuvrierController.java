@@ -135,13 +135,17 @@ public class DevisAjoutOuvrierController implements Initializable {
 
             java.util.Date parsed2 = (java.util.Date) format.parse(finDisponibilite.getValue().toString());
             java.sql.Date dateF = new Date(parsed2.getTime());
-
+            
+            if(dateD.compareTo(dateF) > 0){
+                throw new IllegalArgumentException("les dates sont impossibles");
+            }
+            
             OuvrierDuChantierDto ouvrier = new OuvrierDuChantierDto(1000, dateD, dateF, Double.parseDouble(quantite.getText()),
                     Integer.parseInt(idChantier.getText()), Integer.parseInt(id.getText()));
             Utilitaire.insertOuvrierDuChantier(ouvrier);
             Stage stage = (Stage) valider.getScene().getWindow();
             stage.close();
-        } catch (ParseException ex) {
+        } catch (ParseException | IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
         }
 
