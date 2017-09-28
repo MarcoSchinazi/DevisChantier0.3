@@ -104,8 +104,6 @@ public class DevisOverviewController implements Initializable {
     @FXML
     private Label voiture;
     @FXML
-    private Label materiel;
-    @FXML
     private Label petitMateriel;
     @FXML
     private Label conducteur;
@@ -115,6 +113,12 @@ public class DevisOverviewController implements Initializable {
     private Button pdf;
     @FXML
     private Label messagePdf;
+    @FXML
+    private Label codeReference;
+    @FXML
+    private Label materiau;
+    @FXML
+    private Label totalTva;
 
     /**
      * Initializes the controller class.
@@ -242,18 +246,40 @@ public class DevisOverviewController implements Initializable {
                     OuvrierDuChantierSel sel = new OuvrierDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
                     Double montantOuvrier = Utilitaire.montantOuvriers(sel);
                     ouvrier.setText(montantOuvrier.toString());
-                    
+
                     CamionDuChantierSel cs = new CamionDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
                     Double montantCamion = Utilitaire.montantCamions(cs);
                     camion.setText(montantCamion.toString());
-                    
+
                     VoitureDuChantierSel vs = new VoitureDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
                     Double montantVoiture = Utilitaire.montantVoitures(vs);
                     voiture.setText(montantVoiture.toString());
-                    
-                    Double montantTotalHtva = (montantOuvrier + montantCamion);
+
+                    EnginDuChantierSel es = new EnginDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
+                    Double montantEngin = Utilitaire.montantEngins(es);
+                    engin.setText(montantEngin.toString());
+
+                    MateriauDuChantierSel ms = new MateriauDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
+                    Double montantMateriau = Utilitaire.montantMateriaux(ms);
+                    materiau.setText(montantMateriau.toString());
+
+                    PetitMaterielDuChantierSel pms = new PetitMaterielDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
+                    Double montantPetitMateriel = Utilitaire.montantPetitsMateriels(pms);
+                    petitMateriel.setText(montantPetitMateriel.toString());
+
+                    ConducteurDuChantierSel cos = new ConducteurDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
+                    Double montantConducteur = Utilitaire.montantConducteurs(cos);
+                    conducteur.setText(montantConducteur.toString());
+
+                    CodeReferenceDuChantierSel cods = new CodeReferenceDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
+                    Double montantCodeReference = Utilitaire.montantCodesReferences(cods);
+                    codeReference.setText(montantCodeReference.toString());
+
+                    Double montantTotalHtva = (montantOuvrier + montantCamion + montantVoiture + montantEngin + montantPetitMateriel + montantMateriau + montantConducteur + montantCodeReference);
                     Double montantTotal = montantTotalHtva + montantTotalHtva * 0.21;
-                    total.setText(montantTotal.toString());
+                    total.setText(montantTotalHtva.toString());
+                    totalTva.setText(montantTotal.toString());
+
                 }
             });
         } catch (DevisChantierBusinessException ex) {

@@ -54,6 +54,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label text="ID Devis" />
@@ -70,14 +71,14 @@
                         <Label text="Coût camions" GridPane.rowIndex="7" />
                         <Label text="Coût voitures" GridPane.rowIndex="8" />
                         <Label text="Coût matériaux" GridPane.rowIndex="10" />
-                        <Label text="Coût petit matériels" GridPane.rowIndex="11" />
+                        <Label text="Coût petits matériels" GridPane.rowIndex="11" />
                         <Label text="Coût conducteurs" GridPane.rowIndex="12" />
+                        <Label text="Coût engins" GridPane.rowIndex="9" />
                         <Label fx:id="ouvrier" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                         <Label fx:id="camion" GridPane.columnIndex="2" GridPane.rowIndex="7" />
                         <Label fx:id="engin" GridPane.columnIndex="2" GridPane.rowIndex="9" />
                         <Label fx:id="voiture" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                        <Label text="Coût engins" GridPane.rowIndex="9" />
-                        <Label fx:id="materiel" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                        <Label fx:id="materiau" GridPane.columnIndex="2" GridPane.rowIndex="10" />
                         <Label fx:id="petitMateriel" GridPane.columnIndex="2" GridPane.rowIndex="11" />
                         <Label fx:id="conducteur" GridPane.columnIndex="2" GridPane.rowIndex="12" />
                         <Label text="Coût total" GridPane.rowIndex="15" />
@@ -93,6 +94,9 @@
                         <Label text="Coût codes de références" GridPane.rowIndex="13" />
                         <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="13" />
                         <Label fx:id="codeReference" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+                        <Label text="TVA comprise" GridPane.rowIndex="16" />
+                        <Label text="€" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                        <Label fx:id="totalTva" GridPane.columnIndex="2" GridPane.rowIndex="16" />
                      </children>
                   </GridPane>
                   <ButtonBar layoutX="54.0" layoutY="250.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
