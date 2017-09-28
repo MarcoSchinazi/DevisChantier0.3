@@ -64,15 +64,6 @@ public class MainOverviewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(DevisChantier.class.getResource("RootLayout.fxml"));
-
-        try {
-            rootLayout = (BorderPane) loader.load();
-            scene = new Scene(loader.getRoot());
-        } catch (IOException ex) {
-            System.out.println("ex.getMessage()");
-        }
     }
 
     public void initVariables(int id, boolean isPatron) {
@@ -86,11 +77,19 @@ public class MainOverviewController implements Initializable {
 
     @FXML
     private void afficherPage(ActionEvent event) {
+        FXMLLoader l = new FXMLLoader();
+        l.setLocation(DevisChantier.class.getResource("RootLayout.fxml"));
+
         FXMLLoader loader = new FXMLLoader();
         Button item = (Button) event.getSource();
         loader.setLocation(DevisChantier.class.getResource(item.getId() + ".fxml"));
         AnchorPane overview;
         try {
+            rootLayout = (BorderPane) l.load();
+            scene = new Scene(l.getRoot());
+            RootLayoutController control = l.<RootLayoutController>getController();
+            control.initVariables(loginId, isPatron);
+
             stage = (Stage) devis.getScene().getWindow();
             stage.setScene(scene);
             overview = (AnchorPane) loader.load();

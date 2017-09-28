@@ -199,7 +199,6 @@ public class OuvrierOverviewController implements Initializable {
                 ChantierDto chantier = FacadeDB.findChantierBySel(s);
                 data.add(chantier);
             }
-            System.out.println(data.get(0));
             listChantiers.setItems(data);
             listChantiers.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
 

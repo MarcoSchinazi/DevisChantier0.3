@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package devischantier;
 
 import java.io.IOException;
@@ -23,6 +22,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
 /**
  * FXML Controller class
  *
@@ -66,27 +66,27 @@ public class RootLayoutController implements Initializable {
     private Menu aPropos;
     @FXML
     private MenuItem informations;
-    
+
     private boolean isPatron;
     private int loginId;
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
-    public void initVariables(int id, boolean isPatron){
+    }
+
+    public void initVariables(int id, boolean isPatron) {
         this.isPatron = isPatron;
         this.loginId = id;
-        
-        if (!isPatron){
+
+        if (!isPatron) {
             conducteurs.setVisible(false);
         }
     }
-    
+
     @FXML
     private void closeApplication(ActionEvent event) {
         Platform.exit();
@@ -100,13 +100,20 @@ public class RootLayoutController implements Initializable {
         try {
             rootLayout = (BorderPane) l.load();
             Scene scene = new Scene(l.getRoot());
+            RootLayoutController control = l.<RootLayoutController>getController();
+            control.initVariables(loginId, isPatron);
+
             Stage stage = (Stage) borderPane.getScene().getWindow();
             stage.setScene(scene);
 
             FXMLLoader loader = new FXMLLoader();
             MenuItem item = (MenuItem) event.getSource();
-            loader.setLocation(DevisChantier.class.getResource(item.getId()+".fxml"));
+            loader.setLocation(DevisChantier.class.getResource(item.getId() + ".fxml"));
             AnchorPane mainOverview = (AnchorPane) loader.load();
+            if(item.getId().compareTo("MainOverview") == 0){
+                MainOverviewController controller = loader.<MainOverviewController>getController();
+                controller.initVariables(loginId, isPatron);
+            }
             rootLayout.setCenter(mainOverview);
         } catch (IOException ex) {
             Logger.getLogger(RootLayoutController.class.getName()).log(Level.SEVERE, null, ex);

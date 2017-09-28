@@ -138,8 +138,8 @@ public class OuvrierFormEditerController implements Initializable {
                 int day4 = Integer.parseInt(d4.format(date4));
                 LocalDate dateN4 = LocalDate.of(year4, month4, day4);
 
-                debutDisponibilite.setValue(dateN);
-                finDisponibilite.setValue(dateN2);
+                debutDisponibilite.setValue(dateN3);
+                finDisponibilite.setValue(dateN4);
                 quantite.setText(Double.toString(ouvrierChantier.getNombreHeures()));
                 idChantier.setText(Integer.toString(ouvrierChantier.getIdChantier()));
             }
