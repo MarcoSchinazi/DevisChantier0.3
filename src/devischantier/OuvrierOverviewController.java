@@ -89,7 +89,6 @@ public class OuvrierOverviewController implements Initializable {
     @FXML
     private ListView<ChantierDto> listChantiers;
 
-
     /**
      * Initializes the controller class.
      */
@@ -125,16 +124,25 @@ public class OuvrierOverviewController implements Initializable {
             ouvrierInfo = (AnchorPane) loader.load();
 
             //passer paramètres au controller suivant
-            if (id != null) {/*
+            if (id.getText().compareTo("/") != 0) {
+                int idOuvrier = Integer.parseInt(id.getText());
                 OuvrierFormEditerController controller = loader.<OuvrierFormEditerController>getController();
-                controller.initVariables(Integer.parseInt(id.getText()));
-                 */
+                if (idChantier.getText().compareTo("/") != 0) {
+                    int idChant = Integer.parseInt(idChantier.getText());
+                    OuvrierDuChantierSel sel = new OuvrierDuChantierSel(idOuvrier, idChant);
+                    Collection<OuvrierDuChantierDto> ouv = FacadeDB.findOuvriersDuChantierBySel(sel);
+                    controller.initVariables(idOuvrier, ouv.iterator().next().getId());
+                }
+                else{
+                    controller.initVariables(idOuvrier, -1000);
+                }
+
             }
             Stage stage = new Stage();
             Scene scene = new Scene(ouvrierInfo);
             stage.setScene(scene);
             stage.show();
-        } catch (IOException ex) {
+        } catch (IOException | DevisChantierBusinessException ex) {
             System.out.println(ex.getMessage());
         }
     }
