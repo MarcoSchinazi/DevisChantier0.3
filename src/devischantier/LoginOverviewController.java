@@ -91,6 +91,9 @@ public class LoginOverviewController implements Initializable {
             if (loginId != null) {
                 MainOverviewController controller = loader.<MainOverviewController>getController();
                 controller.initVariables(Integer.parseInt(loginId.getText()), isPatron);
+                
+                RootLayoutController control = l.<RootLayoutController>getController();
+                control.initVariables(Integer.parseInt(loginId.getText()), isPatron);
             }
             Scene scene = new Scene(l.getRoot());
             Stage stage = (Stage) loginConnect.getScene().getWindow();

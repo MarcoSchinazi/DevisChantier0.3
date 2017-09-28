@@ -66,6 +66,10 @@ public class RootLayoutController implements Initializable {
     private Menu aPropos;
     @FXML
     private MenuItem informations;
+    
+    private boolean isPatron;
+    private int loginId;
+    
     /**
      * Initializes the controller class.
      */
@@ -73,6 +77,15 @@ public class RootLayoutController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    public void initVariables(int id, boolean isPatron){
+        this.isPatron = isPatron;
+        this.loginId = id;
+        
+        if (!isPatron){
+            conducteurs.setVisible(false);
+        }
+    }
     
     @FXML
     private void closeApplication(ActionEvent event) {

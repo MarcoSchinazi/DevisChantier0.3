@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package devischantier;
 
 import java.io.IOException;
@@ -55,7 +54,7 @@ public class MainOverviewController implements Initializable {
     BorderPane rootLayout;
     Scene scene;
     Stage stage;
-    
+
     private boolean isPatron;
     private int loginId;
 
@@ -75,15 +74,18 @@ public class MainOverviewController implements Initializable {
             System.out.println("ex.getMessage()");
         }
     }
-    
-    public void initVariables(int id, boolean isPatron){
+
+    public void initVariables(int id, boolean isPatron) {
         this.isPatron = isPatron;
         this.loginId = id;
+
+        if (!isPatron) {
+            conducteurs.setDisable(true);
+        }
     }
 
     @FXML
     private void afficherPage(ActionEvent event) {
-
         FXMLLoader loader = new FXMLLoader();
         Button item = (Button) event.getSource();
         loader.setLocation(DevisChantier.class.getResource(item.getId() + ".fxml"));
