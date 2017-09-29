@@ -117,6 +117,11 @@ public class DevisAjoutEnginController implements Initializable {
             java.util.Date parsed2 = (java.util.Date) format.parse(finDisponibilite.getValue().toString());
             java.sql.Date dateF = new Date(parsed2.getTime());
 
+            if (dateD.compareTo(dateF) > 0) {
+                message.setText("les dates sont impossibles");
+                throw new IllegalArgumentException("les dates sont impossibles");
+            }
+
             EnginDuChantierDto engin = new EnginDuChantierDto(1000, Double.parseDouble(quantite.getText()), Double.parseDouble(nbrHeures.getText()), dateD, dateF, Integer.parseInt(idChantier.getText()), Integer.parseInt(id.getText()));
             Utilitaire.insertEnginDuChantier(engin);
             Stage stage = (Stage) valider.getScene().getWindow();

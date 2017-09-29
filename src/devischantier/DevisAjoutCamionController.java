@@ -129,8 +129,13 @@ public class DevisAjoutCamionController implements Initializable {
             java.util.Date parsed2 = (java.util.Date) format.parse(finDisponibilite.getValue().toString());
             java.sql.Date dateF = new Date(parsed2.getTime());
 
+            if (dateD.compareTo(dateF) > 0) {
+                message.setText("les dates sont impossibles");
+                throw new IllegalArgumentException("les dates sont impossibles");
+            }
+
             CamionDuChantierDto camion = new CamionDuChantierDto(1000, dateD, dateF, Double.parseDouble(quantite.getText()),
-            Integer.parseInt(idChantier.getText()), Integer.parseInt(id.getText()));
+                    Integer.parseInt(idChantier.getText()), Integer.parseInt(id.getText()));
             Utilitaire.insertCamionDuChantier(camion);
             Stage stage = (Stage) valider.getScene().getWindow();
             stage.close();

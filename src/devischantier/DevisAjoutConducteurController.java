@@ -133,6 +133,11 @@ public class DevisAjoutConducteurController implements Initializable {
             java.util.Date parsed2 = (java.util.Date) format.parse(finDisponibilite.getValue().toString());
             java.sql.Date dateF = new Date(parsed2.getTime());
 
+            if (dateD.compareTo(dateF) > 0) {
+                message.setText("les dates sont impossibles");
+                throw new IllegalArgumentException("les dates sont impossibles");
+            }
+
             ConducteurDuChantierDto conducteur = new ConducteurDuChantierDto(1000, dateD, dateF, Double.parseDouble(quantite.getText()), Integer.parseInt(id.getText()), Integer.parseInt(idChantier.getText()));
             Utilitaire.insertConducteurDuChantier(conducteur);
             Stage stage = (Stage) valider.getScene().getWindow();

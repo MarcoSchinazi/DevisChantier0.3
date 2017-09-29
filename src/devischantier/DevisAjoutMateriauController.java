@@ -95,6 +95,11 @@ public class DevisAjoutMateriauController implements Initializable {
             java.util.Date parsed2 = (java.util.Date) format.parse(finDisponibilite.getValue().toString());
             java.sql.Date dateF = new Date(parsed2.getTime());
 
+            if (dateD.compareTo(dateF) > 0) {
+                message.setText("les dates sont impossibles");
+                throw new IllegalArgumentException("les dates sont impossibles");
+            }
+
             MateriauDuChantierDto materiau = new MateriauDuChantierDto(1000, Double.parseDouble(quantite.getText()), dateD, dateF, Integer.parseInt(idChantier.getText()), Integer.parseInt(id.getText()));
             Utilitaire.insertMateriauDuChantier(materiau);
             Stage stage = (Stage) valider.getScene().getWindow();

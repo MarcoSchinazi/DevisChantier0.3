@@ -100,7 +100,7 @@ public class DevisAjoutCodeReferenceController implements Initializable {
         }
     }
 
-      @FXML
+    @FXML
     private void gererValider(ActionEvent event) {
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -110,6 +110,11 @@ public class DevisAjoutCodeReferenceController implements Initializable {
 
             java.util.Date parsed2 = (java.util.Date) format.parse(finDisponibilite.getValue().toString());
             java.sql.Date dateF = new Date(parsed2.getTime());
+
+            if (dateD.compareTo(dateF) > 0) {
+                message.setText("les dates sont impossibles");
+                throw new IllegalArgumentException("les dates sont impossibles");
+            }
 
             CodeReferenceDuChantierDto codeReference = new CodeReferenceDuChantierDto(1000, Double.parseDouble(quantite.getText()), Integer.parseInt(idChantier.getText()), Integer.parseInt(id.getText()));
             Utilitaire.insertCodeReferenceDuChantier(codeReference);
