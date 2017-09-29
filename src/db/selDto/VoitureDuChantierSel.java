@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author Vali
  */
 public class VoitureDuChantierSel {
-    
+
     private int idVoitureDuChantier;
     private Date date;
     private int idVoiture;
@@ -30,7 +30,15 @@ public class VoitureDuChantierSel {
     public VoitureDuChantierSel(int idChantier, String c) {
         this.idChantier = idChantier;
     }
-    
+
+    public VoitureDuChantierSel(int idChantier, boolean b) {
+        this.idChantier = idChantier;
+    }
+
+    public VoitureDuChantierSel(int idVoiture, int idChantier) {
+        this.idVoiture = idVoiture;
+        this.idChantier = idChantier;
+    }
 
     public VoitureDuChantierSel(Date aujourdhui) {
         this.date = aujourdhui;
@@ -39,11 +47,9 @@ public class VoitureDuChantierSel {
     public java.sql.Date getDate() {
         return date;
     }
-        
+
     public int getIdVoitureDuChantier() {
         return idVoitureDuChantier;
     }
-    
-    
-    
+
 }

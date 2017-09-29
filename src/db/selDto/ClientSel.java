@@ -28,6 +28,10 @@ public class ClientSel {
         public ClientSel(int idClient) {
         this.idClient = idClient;
     }
+        
+        public ClientSel(int idClient, String c) {
+        this.idClient = idClient;
+    }
 
     public int getIdClient() {
         return idClient;
