@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="devischantier.CodeReferenceFormController">
    <children>
       <GridPane AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0">
@@ -30,8 +29,8 @@
             <TextField fx:id="prix" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="valider" layoutX="400.0" layoutY="338.0" mnemonicParsing="false" onAction="#validation" text="Valider" />
-      <Button fx:id="annuler" layoutX="463.0" layoutY="338.0" mnemonicParsing="false" onAction="#annulation" text="Annuler" />
-      <Label fx:id="message" layoutX="27.0" layoutY="343.0" />
+      <Button fx:id="valider" layoutX="400.0" layoutY="338.0" mnemonicParsing="false" onAction="#validation" text="Valider" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="80.0" />
+      <Button fx:id="annuler" layoutX="463.0" layoutY="338.0" mnemonicParsing="false" onAction="#annulation" text="Annuler" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+      <Label fx:id="message" layoutX="27.0" layoutY="343.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="160.0" />
    </children>
 </AnchorPane>
