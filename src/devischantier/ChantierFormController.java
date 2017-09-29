@@ -65,8 +65,10 @@ public class ChantierFormController implements Initializable {
     private Label message;
     @FXML
     private ListView<ClientDto> listClients;
-    
+
     private int idClient;
+    @FXML
+    private Label message2;
 
     /**
      * Initializes the controller class.
@@ -102,13 +104,23 @@ public class ChantierFormController implements Initializable {
             java.util.Date parsed5 = (java.util.Date) format.parse(finEffective.getValue().toString());
             java.sql.Date date5 = new Date(parsed5.getTime());
 
+            if (date2.compareTo(date4) > 0) {
+                message2.setText("les dates sont impossibles");
+                throw new IllegalArgumentException("les dates sont impossibles");
+            }
+
+            if (date3.compareTo(date5) > 0) {
+                message2.setText("les dates sont impossibles");
+                throw new IllegalArgumentException("les dates sont impossibles");
+            }
+
             ChantierDto chantier = new ChantierDto(10000, idClient, localisation.getText(), designation.getText(), commentaire.getText(), date1, date2, date3, date4, date5, validation.isSelected());
             if (Utilitaire.insertChantier(chantier)) {
-                message.setText("Chantier ajouté avec succès !");
+                message2.setText("Chantier ajouté avec succès !");
                 Stage stage = (Stage) pane.getScene().getWindow();
                 stage.close();
             } else {
-                message.setText("Erreur : le chantier n'a pas pu être ajouté ...!");
+                message2.setText("Erreur : le chantier n'a pas pu être ajouté ...!");
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
