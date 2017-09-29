@@ -66,17 +66,19 @@ public class CamionOverviewController implements Initializable {
     @FXML
     private TableColumn<CamionDto, String> colonneMarque;
     @FXML
-    private Button valider;
-    @FXML
     private Button editer;
     @FXML
     private Label idChantier;
     @FXML
-    private TextField nbrHeures;
+    private Button nouveau;
     @FXML
-    private DatePicker dateDebut;
+    private Button supprimer;
     @FXML
-    private DatePicker dateFin;
+    private Label debutDisponibilite;
+    @FXML
+    private Label finDisponibilite;
+    @FXML
+    private Label quantite;
 
     /**
      * Initializes the controller class.

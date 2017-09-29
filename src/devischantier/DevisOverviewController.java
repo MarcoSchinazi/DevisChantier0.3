@@ -50,6 +50,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import db.dto.CamionDuChantierDto;
+import db.dto.ChantierDto;
 import db.dto.CodeReferenceDuChantierDto;
 import db.dto.ConducteurDuChantierDto;
 import db.dto.EnginDuChantierDto;
@@ -242,7 +243,7 @@ public class DevisOverviewController implements Initializable {
                     statut.setText(devis.getStatut());
                     date.setText(devis.getDateDevis().toString());
                     idChantier.setText(Integer.toString(devis.getIdChantier()));
-
+                    
                     OuvrierDuChantierSel sel = new OuvrierDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
                     Double montantOuvrier = Utilitaire.montantOuvriers(sel);
                     ouvrier.setText(montantOuvrier.toString());
@@ -274,11 +275,14 @@ public class DevisOverviewController implements Initializable {
                     CodeReferenceDuChantierSel cods = new CodeReferenceDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
                     Double montantCodeReference = Utilitaire.montantCodesReferences(cods);
                     codeReference.setText(montantCodeReference.toString());
-
+                    
                     Double montantTotalHtva = (montantOuvrier + montantCamion + montantVoiture + montantEngin + montantPetitMateriel + montantMateriau + montantConducteur + montantCodeReference);
                     Double montantTotal = montantTotalHtva + montantTotalHtva * 0.21;
                     total.setText(montantTotalHtva.toString());
                     totalTva.setText(montantTotal.toString());
+            
+                    
+                                                                     
 
                 }
             });
@@ -288,7 +292,7 @@ public class DevisOverviewController implements Initializable {
     }
 
     @FXML
-    private void creerPdf(ActionEvent event) {
+    private void creerPdf(ActionEvent event) throws DocumentException {
         {
             Document document = new Document(PageSize.A4);
             try {
@@ -311,18 +315,10 @@ public class DevisOverviewController implements Initializable {
                 p0.setAlignment(Element.ALIGN_RIGHT);
                 document.add(p0);
 
-                Paragraph p1 = new Paragraph("Devis n° : " + "" + " | Statut : " + "" + " | Date du devis : " + "", maFonte2);
-                p1.setAlignment(Element.ALIGN_LEFT);
-                document.add(p1);
-
-                String var2 = "ER517";
-                String dat1 = "2018-02-15";
-                String dat2 = "2018-02-30";
-                String desi = "Parc de woluwe";
-                Paragraph p2 = new Paragraph("Chantier n°" + var2 + " | Date prévue : " + dat1 + " | Date fin : " + dat2 + "\nDésignation du projet : " + desi + "\nInformations client :", maFonte2);
-                p2.setAlignment(Element.ALIGN_LEFT);
+                Paragraph p2 = new Paragraph("Devis n°" + idDevis.getText() + "\nDésignation : " + designation.getText() + "\nStatut : " + statut.getText() + "\nDate du devis : " + date.getText());
+                p0.setAlignment(Element.ALIGN_LEFT);
                 document.add(p2);
-
+                
                 Paragraph p3 = new Paragraph("Numéro :\nNom :\nPrénom :\nTéléphone :\nEmail :\n ", maFonte);
                 p3.setAlignment(Element.ALIGN_LEFT);
                 document.add(p3);
@@ -355,78 +351,75 @@ public class DevisOverviewController implements Initializable {
                 e.printStackTrace();
             }
 
-            float[] columnWidths = {1, 5, 5};
-            PdfPTable table = new PdfPTable(columnWidths);
-            table.setWidthPercentage(100);
-            table.getDefaultCell().setUseAscender(true);
-            table.getDefaultCell().setUseDescender(true);
-            Font f = new Font(FontFamily.HELVETICA, 13, Font.NORMAL, GrayColor.GRAYWHITE);
-            PdfPCell cell = new PdfPCell(new Phrase("Informations détaillées", f));
-            cell.setBackgroundColor(GrayColor.GRAYBLACK);
-            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cell.setColspan(3);
-            table.addCell(cell);
-            table.getDefaultCell().setBackgroundColor(GrayColor.YELLOW);
+            PdfPTable table = new PdfPTable(3);
 
-            table.addCell("#");
-            table.addCell("Références");
-            table.addCell("Prix HTVA");
+            PdfPCell c1 = new PdfPCell(new Phrase("Ressources"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
 
-            table.setHeaderRows(3);
+            c1 = new PdfPCell(new Phrase("TVA"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
 
-            table.getDefaultCell().setBackgroundColor(GrayColor.GRAYWHITE);
-            table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+            c1 = new PdfPCell(new Phrase("Montant HTVA"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            table.setHeaderRows(1);
 
-            table.addCell("1");
-            table.addCell("Conducteur");
-            table.addCell("1586");
-
-            table.addCell("2");
-            table.addCell("Ouvriers");
-            table.addCell("2560");
-
-            table.addCell("3");
             table.addCell("Engins");
-            table.addCell("4876");
+            table.addCell("21%");
+            table.addCell(engin.getText());
 
-            table.addCell("4");
             table.addCell("Matériaux");
-            table.addCell("589");
+            table.addCell("21%");
+            table.addCell(materiau.getText());
 
-            table.addCell("5");
             table.addCell("Petits matériels");
-            table.addCell("699");
+            table.addCell("21%");
+            table.addCell(petitMateriel.getText());
 
-            table.addCell("6");
             table.addCell("Codes références");
-            table.addCell("125");
+            table.addCell("21%");
+            table.addCell(codeReference.getText());
 
-            table.addCell("7");
+            table.addCell(" ");
+            table.addCell(" ");
+            table.addCell(" ");
+
             table.addCell("Voitures");
-            table.addCell("350");
+            table.addCell("21%");
+            table.addCell(voiture.getText());
 
-            table.addCell("8");
             table.addCell("Camions");
-            table.addCell("100");
+            table.addCell("21%");
+            table.addCell(camion.getText());
 
             table.addCell(" ");
             table.addCell(" ");
             table.addCell(" ");
 
+            table.addCell("Ouvriers");
             table.addCell(" ");
-            table.addCell("Prix total Hors TVA");
-            table.addCell("12350 €");
+            table.addCell(ouvrier.getText());
+
+            table.addCell("Conducteurs");
+            table.addCell(" ");
+            table.addCell(conducteur.getText());
 
             table.addCell(" ");
-            table.addCell("Prix TVA 21%");
-            table.addCell("16520 €");
+            table.addCell(" ");
+            table.addCell(" ");
 
-            try {
-                document.add(table);
-            } catch (DocumentException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            table.addCell("Total HTVA");
+            table.addCell(" ");
+            table.addCell(total.getText());
+
+            table.addCell("Total TVAC");
+            table.addCell(" ");
+            table.addCell(totalTva.getText());
+
+            document.add(table);
+
             messagePdf.setText("Devis créé avec succès vers : C:/Users/Public/DevisChantier.pdf");
             document.close();
         }

@@ -6,14 +6,21 @@
 package devischantier;
 
 import db.business.FacadeDB;
+import db.dto.ChantierDto;
+import db.dto.VoitureDuChantierDto;
 import db.dto.VoitureDto;
 import db.dto.VoitureDuChantierDto;
 import db.exception.DevisChantierBusinessException;
+import db.selDto.ChantierSel;
+import db.selDto.VoitureDuChantierSel;
 import db.selDto.VoitureDuChantierSel;
 import db.selDto.VoitureSel;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -28,6 +35,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -76,6 +84,8 @@ public class VoitureOverviewController implements Initializable {
     private Label finDisponibilite;
     @FXML
     private Label quantite;
+    @FXML
+    private ListView<ChantierDto> listChantiers;
 
     /**
      * Initializes the controller class.
@@ -156,30 +166,13 @@ public class VoitureOverviewController implements Initializable {
                     chassis.setText(voiture.getNumeroChassis());
                     prix.setText(Double.toString(voiture.getPrixHtva()));
                     carburant.setText(voiture.getCarburant());
-
-                    java.sql.Date date = new Date(System.currentTimeMillis());
-                    VoitureDuChantierSel sel = new VoitureDuChantierSel(Integer.parseInt(id.getText()), date);
-                    System.out.println(date.toString());
-                    try {
-                        Collection<VoitureDuChantierDto> voitChantier = FacadeDB.findVoituresDuChantierBySel(sel);
-                        if (voitChantier.isEmpty()) {
-                            idChantier.setText("/");
-                            debutDisponibilite.setText("/");
-                            finDisponibilite.setText("/");
-                            quantite.setText("/");
-                        } else {
-                            idChantier.setText(Integer.toString(voitChantier.iterator().next().getIdChantier()));
-                            debutDisponibilite.setText(voitChantier.iterator().next().getDebutDisponilibite().toString());
-                            finDisponibilite.setText(voitChantier.iterator().next().getFinDisponilibite().toString());
-                            quantite.setText(Integer.toString(voitChantier.iterator().next().getNombreJours()));
-                        }
-                    } catch (DevisChantierBusinessException ex) {
-                        System.out.println(ex.getMessage());
-                    }
                 }
             });
         } catch (DevisChantierBusinessException ex) {
             System.out.println(ex.getMessage());
         }
     }
+
+    
+
 }

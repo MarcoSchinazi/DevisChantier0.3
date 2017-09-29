@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="devischantier.LoginOverviewController">
    <children>
+      <ImageView fitHeight="583.0" fitWidth="833.0" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../images/cons7.jpg" />
+         </image>
+      </ImageView>
       <TextArea editable="false" layoutX="150.0" layoutY="100.0" prefHeight="200.0" prefWidth="500.0" text="Gestion des devis des chantiers extérieurs&#10;&#10;Épreuve intégrée réalisée en vue de l’obtention du titre de &#10;« Bachelier en Informatique de gestion»&#10;&#10;Valmir Demaj&#10;" />
    </children>
 </AnchorPane>

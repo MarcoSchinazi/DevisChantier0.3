@@ -4,15 +4,35 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="devischantier.LoginOverviewController">
    <children>
-      <TextField id="loginId" fx:id="loginId" alignment="CENTER" layoutX="326.0" layoutY="116.0" promptText="Entrez votre identifiant" text="1" />
+      <ImageView fitHeight="451.0" fitWidth="934.0" preserveRatio="true">
+         <image>
+            <Image url="@../images/cons5.png" />
+         </image>
+      </ImageView>
+      <TextField id="loginId" fx:id="loginId" alignment="CENTER" layoutX="327.0" layoutY="116.0" promptText="Entrez votre identifiant" text="1" />
       <PasswordField id="loginPass" fx:id="loginPass" layoutX="326.0" layoutY="175.0" promptText="Entrez votre mot de passe" text="beli" />
-      <Label layoutX="326.0" layoutY="89.0" text="Identifiant" />
-      <Label layoutX="326.0" layoutY="150.0" text="Mot de passe" />
-      <Button id="loginConnect" fx:id="loginConnect" layoutX="347.0" layoutY="248.0" mnemonicParsing="false" onAction="#gererButton" text="Se connecter" />
+      <Label layoutX="326.0" layoutY="89.0" text="Identifiant" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="326.0" layoutY="150.0" text="Mot de passe" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Button id="loginConnect" fx:id="loginConnect" layoutX="359.0" layoutY="226.0" mnemonicParsing="false" onAction="#gererButton" text="Se connecter" />
       <Label fx:id="loginError" layoutX="326.0" layoutY="329.0" />
+      <Label layoutX="109.0" layoutY="14.0" text="Gestion des devis des chantiers extérieurs" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="61.0" layoutY="420.0" text="Valmir Demaj - 2016/2017 - ICC" textFill="WHITE" />
    </children>
 </AnchorPane>

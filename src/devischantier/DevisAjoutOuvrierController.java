@@ -137,7 +137,8 @@ public class DevisAjoutOuvrierController implements Initializable {
             java.sql.Date dateF = new Date(parsed2.getTime());
             
             if(dateD.compareTo(dateF) > 0){
-                throw new IllegalArgumentException("les dates sont impossibles");
+                message.setText("les dates sont impossibles");
+                throw new IllegalArgumentException("les dates sont impossibles"); 
             }
             
             OuvrierDuChantierDto ouvrier = new OuvrierDuChantierDto(1000, dateD, dateF, Double.parseDouble(quantite.getText()),

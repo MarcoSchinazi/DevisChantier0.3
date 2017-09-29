@@ -8,6 +8,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -31,6 +33,11 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
+                  <ImageView fitHeight="600.0" fitWidth="560.0" layoutX="18.0" layoutY="161.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        <Image url="@../images/cons9.jpg" />
+                     </image>
+                  </ImageView>
                   <Label layoutX="104.0" layoutY="51.0" text="ENGIN" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
                   <GridPane layoutX="43.0" layoutY="104.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0">
                     <columnConstraints>
@@ -63,8 +70,8 @@
                     </buttons>
                   </ButtonBar>
                   <Label fx:id="message" layoutX="112.0" layoutY="243.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="20.0" />
-                  <Label text="CHANTIER ACTUEL" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="5.0" />
-                  <GridPane AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                  <Label text="CHANTIER ACTUEL" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="5.0" />
+                  <GridPane AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
