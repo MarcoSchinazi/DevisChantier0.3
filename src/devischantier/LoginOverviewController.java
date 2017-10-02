@@ -126,7 +126,7 @@ public class LoginOverviewController implements Initializable {
             e.printStackTrace();
         }
 
-        conducteur = new ConducteurDto(Integer.parseInt(loginId.getText()), hash, "0", "0", 0, "Dupont", "Dupont", new Date(1), "", new Date(1), 0);
+        conducteur = new ConducteurDto(Integer.parseInt(loginId.getText()), hash, "0", "0", 0, "Admin", "Admin", new Date(1), "", new Date(1), 0);
         Utilitaire.insertConducteur(conducteur);
         patron = new PatronDto(Integer.parseInt(loginId.getText()));
         try {
