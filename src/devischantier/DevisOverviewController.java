@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -120,6 +121,12 @@ public class DevisOverviewController implements Initializable {
     private Label materiau;
     @FXML
     private Label totalTva;
+    @FXML
+    private Label tva;
+    @FXML
+    private Label tvac;
+    @FXML
+    private Label marge;
 
     /**
      * Initializes the controller class.
@@ -243,46 +250,59 @@ public class DevisOverviewController implements Initializable {
                     statut.setText(devis.getStatut());
                     date.setText(devis.getDateDevis().toString());
                     idChantier.setText(Integer.toString(devis.getIdChantier()));
-                    
+
                     OuvrierDuChantierSel sel = new OuvrierDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
                     Double montantOuvrier = Utilitaire.montantOuvriers(sel);
-                    ouvrier.setText(montantOuvrier.toString());
+                    ouvrier.setText(String.format("%.2f", montantOuvrier));
 
                     CamionDuChantierSel cs = new CamionDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
                     Double montantCamion = Utilitaire.montantCamions(cs);
-                    camion.setText(montantCamion.toString());
+                    //camion.setText(montantCamion.toString());
+                    camion.setText(String.format("%.2f", montantCamion));
 
                     VoitureDuChantierSel vs = new VoitureDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
                     Double montantVoiture = Utilitaire.montantVoitures(vs);
-                    voiture.setText(montantVoiture.toString());
+                    //voiture.setText(montantVoiture.toString());
+                    voiture.setText(String.format("%.2f", montantVoiture));
 
                     EnginDuChantierSel es = new EnginDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
                     Double montantEngin = Utilitaire.montantEngins(es);
-                    engin.setText(montantEngin.toString());
+                    //engin.setText(montantEngin.toString());
+                    engin.setText(String.format("%.2f", montantEngin));
 
                     MateriauDuChantierSel ms = new MateriauDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
                     Double montantMateriau = Utilitaire.montantMateriaux(ms);
-                    materiau.setText(montantMateriau.toString());
+                    //materiau.setText(montantMateriau.toString());
+                    materiau.setText(String.format("%.2f", montantMateriau));
 
                     PetitMaterielDuChantierSel pms = new PetitMaterielDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
                     Double montantPetitMateriel = Utilitaire.montantPetitsMateriels(pms);
-                    petitMateriel.setText(montantPetitMateriel.toString());
+                    //petitMateriel.setText(montantPetitMateriel.toString());
+                    petitMateriel.setText(String.format("%.2f", montantPetitMateriel));
 
                     ConducteurDuChantierSel cos = new ConducteurDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
                     Double montantConducteur = Utilitaire.montantConducteurs(cos);
-                    conducteur.setText(montantConducteur.toString());
+                    //conducteur.setText(montantConducteur.toString());
+                    conducteur.setText(String.format("%.2f", montantConducteur));
 
                     CodeReferenceDuChantierSel cods = new CodeReferenceDuChantierSel(Integer.parseInt(idChantier.getText()), "argumentFactice");
                     Double montantCodeReference = Utilitaire.montantCodesReferences(cods);
-                    codeReference.setText(montantCodeReference.toString());
-                    
+                    //codeReference.setText(montantCodeReference.toString());
+                    codeReference.setText(String.format("%.2f", montantCodeReference));
+
                     Double montantTotalHtva = (montantOuvrier + montantCamion + montantVoiture + montantEngin + montantPetitMateriel + montantMateriau + montantConducteur + montantCodeReference);
-                    Double montantTotal = montantTotalHtva + montantTotalHtva * 0.21;
-                    total.setText(montantTotalHtva.toString());
-                    totalTva.setText(montantTotal.toString());
-            
-                    
-                                                                     
+                    Double montantTva = montantTotalHtva * 0.21;
+                    Double montantTotal = montantTotalHtva + montantTva;
+                    Double montantMarge = montantTotal * 0.20;
+
+                    Double montantTotal2 = montantTotal + montantMarge;
+
+                    total.setText(String.format("%.2f", montantTotalHtva));
+
+                    tva.setText(String.format("%.2f", montantTva));
+                    tvac.setText(String.format("%.2f", montantTotal));
+                    marge.setText(String.format("%.2f", montantMarge));
+                    totalTva.setText(String.format("%.2f", montantTotal2));
 
                 }
             });
@@ -308,18 +328,18 @@ public class DevisOverviewController implements Initializable {
                 maFonte.setSize(11);
 
                 Font maFonte2 = new Font(fonte);
-                maFonte2.setColor(88, 100, 115);
-                maFonte2.setSize(14);
+                maFonte2.setColor(243, 227, 4);
+                maFonte2.setSize(20);
 
                 Paragraph p0 = new Paragraph("Melin\nChaussée Provinciale, 85\n1341 Ottignies\nTEL : 010/61.28.47\nFAX : 010/61.13.27\nEmail : info@melinsa.be ", maFonte);
                 p0.setAlignment(Element.ALIGN_RIGHT);
                 document.add(p0);
 
-                Paragraph p2 = new Paragraph("Devis n°" + idDevis.getText() + "\nDésignation : " + designation.getText() + "\nStatut : " + statut.getText() + "\nDate du devis : " + date.getText());
-                p0.setAlignment(Element.ALIGN_LEFT);
+                Paragraph p2 = new Paragraph("DEVIS\n", maFonte2);
+                p2.setAlignment(Element.ALIGN_CENTER);
                 document.add(p2);
-                
-                Paragraph p3 = new Paragraph("Numéro :\nNom :\nPrénom :\nTéléphone :\nEmail :\n ", maFonte);
+
+                Paragraph p3 = new Paragraph("Devis n°" + idDevis.getText() + "\nDésignation : " + designation.getText() + "\nStatut : " + statut.getText() + "\nDate du devis : " + date.getText() + "\n\n");
                 p3.setAlignment(Element.ALIGN_LEFT);
                 document.add(p3);
 
@@ -355,70 +375,139 @@ public class DevisOverviewController implements Initializable {
 
             PdfPCell c1 = new PdfPCell(new Phrase("Ressources"));
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            c1.setBackgroundColor(BaseColor.ORANGE);
             table.addCell(c1);
 
             c1 = new PdfPCell(new Phrase("TVA"));
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            c1.setBackgroundColor(BaseColor.ORANGE);
             table.addCell(c1);
 
             c1 = new PdfPCell(new Phrase("Montant HTVA"));
             c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            c1.setBackgroundColor(BaseColor.ORANGE);
             table.addCell(c1);
+
             table.setHeaderRows(1);
 
-            table.addCell("Engins");
-            table.addCell("21%");
-            table.addCell(engin.getText());
+            c1 = new PdfPCell(new Phrase("Engins"));
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("21 %"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase(engin.getText() + " €"));
+            c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(c1);
 
-            table.addCell("Matériaux");
-            table.addCell("21%");
-            table.addCell(materiau.getText());
+            c1 = new PdfPCell(new Phrase("Matériaux"));
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("21 %"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase(materiau.getText() + " €"));
+            c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(c1);
 
-            table.addCell("Petits matériels");
-            table.addCell("21%");
-            table.addCell(petitMateriel.getText());
+            c1 = new PdfPCell(new Phrase("Petits matériels"));
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("21 %"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase(petitMateriel.getText() + " €"));
+            c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(c1);
 
-            table.addCell("Codes références");
-            table.addCell("21%");
-            table.addCell(codeReference.getText());
-
-            table.addCell(" ");
-            table.addCell(" ");
-            table.addCell(" ");
-
-            table.addCell("Voitures");
-            table.addCell("21%");
-            table.addCell(voiture.getText());
-
-            table.addCell("Camions");
-            table.addCell("21%");
-            table.addCell(camion.getText());
-
-            table.addCell(" ");
-            table.addCell(" ");
-            table.addCell(" ");
-
-            table.addCell("Ouvriers");
-            table.addCell(" ");
-            table.addCell(ouvrier.getText());
-
-            table.addCell("Conducteurs");
-            table.addCell(" ");
-            table.addCell(conducteur.getText());
+            c1 = new PdfPCell(new Phrase("Codes références"));
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("21 %"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase(codeReference.getText() + " €"));
+            c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(c1);
 
             table.addCell(" ");
             table.addCell(" ");
             table.addCell(" ");
 
-            table.addCell("Total HTVA");
-            table.addCell(" ");
-            table.addCell(total.getText());
+            c1 = new PdfPCell(new Phrase("Voitures"));
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("21 %"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase(voiture.getText() + " €"));
+            c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(c1);
 
-            table.addCell("Total TVAC");
+            c1 = new PdfPCell(new Phrase("Camions"));
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase("21 %"));
+            c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(c1);
+            c1 = new PdfPCell(new Phrase(camion.getText() + " €"));
+            c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(c1);
+
             table.addCell(" ");
-            table.addCell(totalTva.getText());
+            table.addCell(" ");
+            table.addCell(" ");
+
+            c1 = new PdfPCell(new Phrase("Ouvriers"));
+            table.addCell(c1);
+            table.addCell(" ");
+            c1 = new PdfPCell(new Phrase(ouvrier.getText() + " €"));
+            c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(c1);
+
+            c1 = new PdfPCell(new Phrase("Conducteurs"));
+            table.addCell(c1);
+            table.addCell(" ");
+            c1 = new PdfPCell(new Phrase(conducteur.getText() + " €"));
+            c1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(c1);
+
+            PdfPTable table2 = new PdfPTable(2);
+
+            PdfPCell c2 = new PdfPCell(new Phrase(" "));
+            c2.setBorder(0);
+            table2.addCell(c2);
+
+            c2 = new PdfPCell(new Phrase(" "));
+            c2.setBorder(0);
+            table2.addCell(c2);
+
+            table2.setHeaderRows(1);
+
+            table2.addCell("Prix de revient (HTVA)");
+            c2 = new PdfPCell(new Phrase(total.getText() + " €"));
+            c2.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table2.addCell(c2);
+
+            table2.addCell("TVA 21%");
+            c2 = new PdfPCell(new Phrase(tva.getText() + " €"));
+            c2.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table2.addCell(c2);
+
+            table2.addCell("Prix de revient (TVAC)");
+            c2 = new PdfPCell(new Phrase(tvac.getText() + " €"));
+            c2.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table2.addCell(c2);
+
+            table2.addCell("Marge 20%");
+            c2 = new PdfPCell(new Phrase(marge.getText() + " €"));
+            c2.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table2.addCell(c2);
+
+            c2 = new PdfPCell(new Phrase("Total du devis"));
+            c2.setBackgroundColor(BaseColor.ORANGE);
+            table2.addCell(c2);
+            c2 = new PdfPCell(new Phrase(totalTva.getText() + " €"));
+            c2.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            c2.setBackgroundColor(BaseColor.ORANGE);
+            table2.addCell(c2);
 
             document.add(table);
+            document.add(table2);
 
             messagePdf.setText("Devis créé avec succès vers : C:/Users/Public/DevisChantier.pdf");
             document.close();
