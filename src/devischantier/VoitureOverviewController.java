@@ -84,8 +84,6 @@ public class VoitureOverviewController implements Initializable {
     private Label finDisponibilite;
     @FXML
     private Label quantite;
-    @FXML
-    private ListView<ChantierDto> listChantiers;
 
     /**
      * Initializes the controller class.

@@ -40,7 +40,7 @@ import static javafx.application.Application.launch;
  *
  * @author Vali
  */
-public class DevisChantier2 extends Application {
+public class Test extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
